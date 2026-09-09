@@ -1,0 +1,28 @@
+representation,target,scheme,R2,n_train,n_test
+Laboratory spectrum,sand,ICRAF.ISRIC,-0.628,36897,3636
+Laboratory spectrum,sand,KSSL.SSL,0.041,25807,14726
+Laboratory spectrum,sand,LUCAS.SSL,-1.995,18362,22171
+Laboratory spectrum,silt,ICRAF.ISRIC,-0.127,36897,3636
+Laboratory spectrum,silt,KSSL.SSL,-0.109,25807,14726
+Laboratory spectrum,silt,LUCAS.SSL,-6.343,18362,22171
+Laboratory spectrum,clay,ICRAF.ISRIC,-1.061,36897,3636
+Laboratory spectrum,clay,KSSL.SSL,-0.603,25807,14726
+Laboratory spectrum,clay,LUCAS.SSL,-0.258,18362,22171
+Hyperspectral,sand,ICRAF.ISRIC,-0.773,36897,3636
+Hyperspectral,sand,KSSL.SSL,0.023,25807,14726
+Hyperspectral,sand,LUCAS.SSL,-2.558,18362,22171
+Hyperspectral,silt,ICRAF.ISRIC,-0.125,36897,3636
+Hyperspectral,silt,KSSL.SSL,-0.138,25807,14726
+Hyperspectral,silt,LUCAS.SSL,-6.01,18362,22171
+Hyperspectral,clay,ICRAF.ISRIC,-1.2,36897,3636
+Hyperspectral,clay,KSSL.SSL,-0.621,25807,14726
+Hyperspectral,clay,LUCAS.SSL,0.061,18362,22171
+Multispectral,sand,ICRAF.ISRIC,-0.198,36897,3636
+Multispectral,sand,KSSL.SSL,-0.094,25807,14726
+Multispectral,sand,LUCAS.SSL,-0.044,18362,22171
+Multispectral,silt,ICRAF.ISRIC,0.06,36897,3636
+Multispectral,silt,KSSL.SSL,-0.179,25807,14726
+Multispectral,silt,LUCAS.SSL,0.077,18362,22171
+Multispectral,clay,ICRAF.ISRIC,-0.043,36897,3636
+Multispectral,clay,KSSL.SSL,-0.078,25807,14726
+Multispectral,clay,LUCAS.SSL,-0.418,18362,22171
