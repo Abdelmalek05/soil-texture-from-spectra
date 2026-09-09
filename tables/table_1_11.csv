@@ -1,13 +1,13 @@
-classe_usda,n,pct
-Silt loam,7847,19.36
-Sandy loam,7660,18.9
-Loam,6488,16.01
-Silty clay loam,4070,10.04
-Clay loam,2955,7.29
-Clay,2773,6.84
-Sand,2660,6.56
-Loamy sand,2617,6.46
-Silty clay,2019,4.98
-Sandy clay loam,1163,2.87
-Silt,146,0.36
-Sandy clay,137,0.34
+classe_usda,count
+Silt loam,7847
+Sandy loam,7660
+Loam,6488
+Silty clay loam,4070
+Clay loam,2955
+Clay,2773
+Sand,2660
+Loamy sand,2617
+Silty clay,2019
+Sandy clay loam,1163
+Silt,146
+Sandy clay,137
