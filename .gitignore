@@ -1,0 +1,38 @@
+# ---------------------------------------------------------------------------
+# Source data — never commit.
+# ossl_tp_dataset.csv is 133 MB, over GitHub's 100 MB hard limit: committing it
+# once poisons the history and needs a rewrite to undo.
+# Root-anchored (/) so that generated CSVs in tables/ stay tracked.
+# ---------------------------------------------------------------------------
+/*.csv
+/*.rds
+
+# Derived cache — rebuilt by the notebook from the CSVs, ~43 MB
+cache/
+cache_backup/
+
+# Generated deliverables that MUST stay tracked (the report cites them).
+# Redundant given the /-anchoring above, kept as a guard against someone
+# loosening those patterns to *.csv later.
+!tables/*.csv
+!figs/*.png
+
+# ---------------------------------------------------------------------------
+# Working files
+# ---------------------------------------------------------------------------
+# Throwaway execution copies used to verify the notebook without dirtying it
+_v*.ipynb
+.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

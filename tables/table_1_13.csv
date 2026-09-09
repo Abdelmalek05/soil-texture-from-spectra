@@ -1,0 +1,4 @@
+programme,n,instrument,clay_mean,clay_median,clay_min,clay_max,clay_p95,pct
+ICRAF.ISRIC,3636,ASD_FieldSpec,32.47,30.03,0.0,96.9,74.98,9.0
+KSSL.SSL,14728,ASD_LabSpec,22.33,20.52,0.0,96.1,53.36,36.3
+LUCAS.SSL,22171,XDS,18.95,17.0,0.0,79.0,43.0,54.7
