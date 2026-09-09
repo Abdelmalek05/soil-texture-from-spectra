@@ -1,0 +1,7 @@
+target,sensor,lab_peak_r,sensor_peak_r,peak_nm,kept,survived
+sand,hyperspectral,0.074,0.074,2494,0.99,yes
+sand,multispectral,0.074,0.038,2190,0.51,no
+silt,hyperspectral,0.155,0.155,2170,1.0,yes
+silt,multispectral,0.155,0.145,2190,0.94,yes
+clay,hyperspectral,0.319,0.318,2494,1.0,yes
+clay,multispectral,0.319,0.251,2190,0.79,partly
