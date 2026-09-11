@@ -36,3 +36,16 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# Submission folder: contains copies of the data, built for zipping
+submission/
+
+# Submission archive (already handed in)
+*.zip

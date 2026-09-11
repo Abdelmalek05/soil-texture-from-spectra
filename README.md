@@ -1,52 +1,96 @@
 # Soil Texture from Spectra
 
-GeoAI lab: predicting the three soil texture fractions — sand, silt and clay — from VisNIR
-reflectance spectra, and measuring how much of that ability survives being reduced to what a
-satellite would actually see.
+Predicting sand, silt and clay from soil reflectance spectra, and measuring how much of that
+ability survives when a satellite measures the soil instead of a laboratory.
 
-The assignment is [`lab.pdf`](lab.pdf). The submission is
-[`soil_texture_lab.ipynb`](soil_texture_lab.ipynb) plus `report.pdf`.
+40 535 soil samples from the [Open Soil Spectroscopy Library](https://soilspectroscopy.github.io),
+each with 421 reflectance values from 400 to 2500 nm.
 
-## Data
+## The main result
 
-Three CSVs from the [Open Soil Spectroscopy Library](https://soilspectroscopy.github.io),
-40 535 rows each, aligned row-for-row on `id`. **They are not in this repository** —
-`ossl_tp_dataset.csv` is 133 MB, over GitHub's 100 MB limit. Place them beside the notebook:
+I trained the same model under two evaluations. In the first one I split the samples
+randomly. In the second one I trained on two surveys and tested on a third survey that the
+model had never seen.
 
-| File | Size | Contents |
-|---|---|---|
-| `ossl_tp_dataset.csv` | 133 MB | 12 metadata columns + `L400`…`L2500` reflectance every 5 nm |
-| `ossl_tp_soillab.csv` | 9.6 MB | 58 laboratory properties (organic carbon, pH, CEC, …) |
-| `ossl_tp_soilsite.csv` | 26 MB | 36 site and provenance columns |
+| Change | Cost in R2 |
+|---|---|
+| 410 laboratory wavelengths down to 11 satellite bands | **0.223** |
+| Random split to one survey left out | **1.174** |
 
-One row is one soil sample analysed in a laboratory, with its spectrum. The three programmes
-present — LUCAS.SSL (22 171), KSSL.SSL (14 728), ICRAF.ISRIC (3 636) — each used a different
-instrument, in a different region, at different depths.
+**The way I evaluate the model costs more than five times the sensor.** Sixteen of the
+eighteen scores under the second evaluation are negative, which means the model is worse than
+simply predicting the average.
 
-## Running it
+![Two evaluations](figs/fig_5_3.png)
+
+*The same nine models under the two evaluations. Green is the random split, red is one survey
+left out. The right panel shows the three folds are very different from each other.*
+
+Two more findings:
+
+- **The richer version of the spectra transfers worse.** Clay loses 1.185 R2 with the full
+  spectra, but only 0.453 with 11 bands. With 410 wavelengths the model can learn the
+  signature of each instrument and use it as a shortcut. Eleven wide bands are too coarse
+  for that.
+- **A wide band can erase a feature completely.** Band B12 is 180 nm wide, so the clay
+  absorption near 2200 nm and both of its sides fall inside one number. The depth of the
+  feature goes from 0.0203 in the laboratory to exactly 0.0000 in multispectral.
+
+![What a wide band removes](figs/fig_2_4.png)
+
+*Mean spectrum between 1900 and 2500 nm. Grey is the laboratory, green is hyperspectral, and
+the red point with the bar is the single 180 nm satellite band.*
+
+## How to run it
 
 ```bash
-pip install pandas numpy scikit-learn matplotlib pyarrow
-jupyter lab soil_texture_lab.ipynb      # then Run All
+git clone https://github.com/Abdelmalek05/soil_texture.git
+cd soil_texture
+pip install -r requirements.txt
+jupyter notebook soil_texture_lab.ipynb
 ```
 
-The notebook is self-contained: it imports nothing local, reads the three CSVs directly and
-writes its figures to `figs/` and its tables to `tables/`. Runtime is a few minutes.
+Then run all cells, from top to bottom. It takes about 5 minutes. The data is already in
+`data/`, so there is nothing to download. The notebook creates `figs/` and `tables/` itself.
 
-## Layout
+On Google Colab, open the notebook and put these two lines in a new first cell:
 
-```
-soil_texture_lab.ipynb   the submission — sections 0-6, every cell labelled by task number
-lab.pdf                  the assignment sheet
-figs/                    generated figures, one per task (fig_1_15.png = task 1.15)
-tables/                  generated tables  (table_1_2.csv = task 1.2)
-report/                  the 4-page report source, rendered to report.pdf
+```python
+!git clone https://github.com/Abdelmalek05/soil_texture.git
+%cd soil_texture
 ```
 
-## Two things worth knowing about this dataset
+## What is in this repository
 
-- **`L400`–`L450` is missing for all 22 171 LUCAS rows** — its XDS instrument starts at
-  455 nm. Structural, not random, so all modelling uses the 410-column 455–2500 nm grid.
-- **`programme` is perfectly confounded with instrument, region, depth regime and albedo.**
-  Leaving one programme out of training varies all five at once, so the resulting drop in
-  score cannot be attributed to any single cause.
+| Path | What it is |
+|---|---|
+| `soil_texture_lab.ipynb` | The whole analysis. Sections 0 to 6, 44 tasks, every cell labelled with its task number |
+| `report.pdf` | A 4 page report of the work |
+| `report.tex` | The LaTeX source of the report |
+| `data/` | The three data files, gzipped. `pandas` reads them directly |
+| `figs/`, `tables/` | The 24 figures and 8 tables produced by the notebook |
+
+## What the notebook does
+
+| Section | What it answers |
+|---|---|
+| 1 | Exploring the data: spectra, targets, programmes, depth, correlations |
+| 2 | Building two simulated satellites from the laboratory spectra |
+| 3 | Predicting what will work, written down before any model is trained |
+| 4 | A first model on 11 satellite bands |
+| 5 | The same model under two different evaluations |
+| 6 | What the model uses, and how much I can trust that answer |
+
+## Two things to know about this data
+
+- **The wavelengths 400 to 450 nm are missing for all 22 171 LUCAS samples.** Their
+  instrument starts at 455 nm. So every model here uses the 410 columns from 455 to 2500 nm.
+- **The survey is also the instrument, the region and the sampling depth.** Each survey used
+  one instrument in one part of the world. When I remove one survey from training, all of
+  these change at the same time. So the table above shows *what* drops, but it cannot show
+  *which cause* is responsible.
+
+## Licence
+
+MIT, see [LICENSE](LICENSE). The data comes from the Open Soil Spectroscopy Library and keeps
+its own licence (CC-BY).
