@@ -44,8 +44,8 @@ the red point with the bar is the single 180 nm satellite band.*
 ## How to run it
 
 ```bash
-git clone https://github.com/Abdelmalek05/soil_texture.git
-cd soil_texture
+git clone https://github.com/Abdelmalek05/soil-texture-from-spectra.git
+cd soil-texture-from-spectra
 pip install -r requirements.txt
 jupyter notebook soil_texture_lab.ipynb
 ```
@@ -56,8 +56,8 @@ Then run all cells, from top to bottom. It takes about 5 minutes. The data is al
 On Google Colab, open the notebook and put these two lines in a new first cell:
 
 ```python
-!git clone https://github.com/Abdelmalek05/soil_texture.git
-%cd soil_texture
+!git clone https://github.com/Abdelmalek05/soil-texture-from-spectra.git
+%cd soil-texture-from-spectra
 ```
 
 ## What is in this repository
